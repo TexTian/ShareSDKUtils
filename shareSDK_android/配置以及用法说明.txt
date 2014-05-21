@@ -1,0 +1,47 @@
+说明：目前ANE只支持新浪微博  微信和微信朋友圈
+
+需要再Android-app.xml中配置的权限
+<uses-permission android:name="android.permission.GET_TASKS" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+需要配置的活动
+<application android:enabled="true">
+	<activity
+		android:windowSoftInputMode="stateHidden|adjustResize"
+		android:theme="@android:style/Theme.Translucent.NoTitleBar"
+		android:name="cn.sharesdk.framework.ShareSDKUIShell" >
+		<intent-filter>
+			<data android:scheme="db-7janx53ilz11gbs" />
+			<action android:name="android.intent.action.VIEW" />
+			<category android:name="android.intent.category.BROWSABLE" />
+			<category android:name="android.intent.category.DEFAULT" />
+		</intent-filter>
+		<intent-filter>
+			<data android:scheme="tencent100371282" />
+			<action android:name="android.intent.action.VIEW" />
+			<category android:name="android.intent.category.BROWSABLE" />
+			<category android:name="android.intent.category.DEFAULT" />
+		</intent-filter>
+	</activity>
+		
+	<!-- 微信分享回调 -->
+	<activity
+		android:name=".wxapi.WXEntryActivity"
+		android:theme="@android:style/Theme.Translucent.NoTitleBar"
+		android:exported="true" />
+</application>
+
+
+/***********************************用法说明**************************************************/
+你需要去http://sharesdk.cn 官网上注册你的应用对应的ssappkey
+然后参考ShareSDKUtil中的用法，你也可以直接使用这个类，只需要配置一行代码
+ShareSDKUtil.Instance().initShareSDK(ssappkey,onComplete, onError, onCancel);
+对应的新浪微博的id和ios的id在ShareSDK.xml中配置
+
